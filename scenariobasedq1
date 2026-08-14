@@ -1,0 +1,71 @@
+class Employee:
+    def __init__(self, employee_id, name, salary):
+        self.employee_id = employee_id
+        self.name = name
+        self.salary = salary
+
+    def get_category(self):
+        if self.salary >= 70000:
+            return "High Salary"
+        elif self.salary >= 40000:
+            return "Medium Salary"
+        else:
+            return "Low Salary"
+
+    def display(self):
+        print(f"Employee ID : {self.employee_id}")
+        print(f"Name        : {self.name}")
+        print(f"Salary      : ₹{self.salary:,.2f}")
+        print(f"Category    : {self.get_category()}")
+        print("-" * 35)
+
+
+class Company:
+    def __init__(self, company_name):
+        self.company_name = company_name
+        self.employees = []
+
+    def add_employee(self, employee):
+        self.employees.append(employee)
+        print("Employee added successfully.")
+
+    def display_employees(self):
+        print(f"\nCompany: {self.company_name}")
+        print("=" * 35)
+
+        if not self.employees:
+            print("No employees found.")
+            return
+
+        for employee in self.employees:
+            employee.display()
+
+
+# Main program
+company = Company("ABC Technologies")
+
+while True:
+    print("\n--- Employee Management System ---")
+    print("1. Add Employee")
+    print("2. Display All Employees")
+    print("3. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        employee_id = input("Enter Employee ID: ")
+        name = input("Enter Employee Name: ")
+        salary = float(input("Enter Salary: ₹"))
+
+        employee = Employee(employee_id, name, salary)
+        company.add_employee(employee)
+
+    elif choice == "2":
+        company.display_employees()
+
+    elif choice == "3":
+        print("Exiting Employee Management System.")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
